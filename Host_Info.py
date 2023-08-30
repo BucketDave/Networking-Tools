@@ -1,9 +1,10 @@
 import ipaddress
 import os
 
-
-print("################################")
+print("")
 print("Gathering Host Network Details")
+print("################################")
+
 h_ipconfig = os.popen("ipconfig /all").read().strip()
 data = h_ipconfig.split("\n")
 keywords = ["Subnet", "IPv4", "Host Name", "Default Gateway", "DHCP Server", "DNS Servers", "Domain"]
@@ -23,10 +24,24 @@ for i in data:
 
         else:
             print(i)
+
 print("################################")
 
 IPv4 = IPv4.replace(" ", "")
 net = ipaddress.ip_network(f"{IPv4}/{Subnet}", strict=False)
-print(net)
+print(f"   Network IP  . . . . . . . . . . . : {net}")
+print(f"   Broadcast IP  . . . . . . . . . . : {net.broadcast_address}")
+print(f"   Is Private  . . . . . . . . . . . : {net.is_private}")
+print(f"   IS Public   . . . . . . . . . . . : {net.is_global}")
 
+print("################################")
 
+"""""""""
+for i in ipaddress.ip_network(net):
+    a = str(i)
+    a = (a.split(".", 3)[3])
+    if a in ["0", "255"]:
+        pass
+    else:
+        print(i)
+"""""""""
