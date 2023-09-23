@@ -4,6 +4,7 @@ from datetime import datetime
 import socket
 import multiprocess
 
+
 def main():
     ascii_banner = pyfiglet.figlet_format("PORT SCANNER")
     print(ascii_banner)
